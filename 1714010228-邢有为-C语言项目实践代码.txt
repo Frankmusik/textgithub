@@ -1,0 +1,169 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define COUNT 30
+
+void shuru();
+void xianshi();
+void chazhao();
+void zengjia();
+void shanchu();
+void tuichu();
+void start();
+
+struct  mmp
+{
+
+    char shebeihao[30];
+    char mingcheng[30];
+    char changjia[30];
+    int riqi;
+    int shuliang;
+    int jiage;
+
+} dev[COUNT];
+
+int count=0;
+
+int main()
+{
+    while(1)
+        start();
+
+}
+
+void start()
+{
+    int a;
+    printf(" \n");
+    printf(" \n");
+    printf(" \n");
+    printf(" \n");
+    printf(" \n");
+    printf(" \n");
+    printf(" \n");
+    printf("                        设备管理系统\n");
+    printf("                      ********************************************************************\n");
+    printf("                      *                         1.  输入数据                             *\n");
+    printf("                      *                                                                  *\n");
+    printf("                      *                         2.  显示数据                             *\n");
+    printf("                      *                                                                  *\n");
+    printf("                      *                         3.  查找数据                             *\n");
+    printf("                      *                                                                  *\n");
+    printf("                      *                         4. 增加一条数据                          *\n");
+    printf("                      *                                                                  *\n");
+    printf("                      *                         5. 删除一条数据                          *\n");
+    printf("                      *                                                                  *\n");
+    printf("                      *                         6.    退出                               *\n");
+    printf("                      ********************************************************************\n");
+    printf("                                             *输入您想要的操作序号*: ");
+    scanf("%d",&a);
+
+    if(a==1)
+        shuru();
+    else if(a==2)
+        xianshi();
+    else if(a==3)
+        chazhao();
+    else if(a==4)
+        zengjia();
+    else if(a==5)
+        shanchu();
+    else if(a==6)
+    {
+        printf("退出\n");
+        exit(0);
+    }
+    else
+    {
+        printf(" wrong! \n");
+    }
+
+}
+
+void shuru()
+{
+
+    char flag[20];
+    do
+    {
+        printf("请输入你的设备信息:\n");
+        printf("设备编号:");
+        scanf("%s",dev[count].shebeihao);
+        printf("设备名字:");
+        scanf("%s",dev[count].mingcheng);
+        printf("生产厂家:");
+        scanf("%s",dev[count].changjia);
+
+        printf("购买日期:");
+        scanf("%d",&dev[count].riqi);
+        printf("购买数量:");
+        scanf("%d",&dev[count].shuliang);
+        printf("设备价格:");
+        scanf("%d",&dev[count].jiage);
+
+        count++;
+        printf("是否继续输入数据 y是  n否 : ");
+        scanf("%s",flag);
+    }
+    while(strcmp(flag,"y")==0||strcmp(flag,"Y")==0);
+
+    xianshi();
+}
+
+void zengjia()
+
+{
+    shuru();
+}
+
+void shanchu()
+{
+    int i,j;
+    char c[20];
+    printf("\输入你想删除的设备 ：\n");
+    printf("名字：");
+    scanf("%s",c);
+    for(i=0; i<count; i++)
+        if(strcmp(c,dev[i].mingcheng)==0)
+            break;
+    for(j=i; j<count-1; j++)
+        dev[j]=dev[j+1];
+    printf("你已经删除了 %s\n",c);
+    count--;
+    xianshi();
+
+}
+void xianshi()
+{
+    int i;
+
+    printf("************************************************************************************************\n");
+    printf("设备编号 设备名称 厂家 购买时间 数量 价格 \n");
+    for(i=0; i<count; i++)
+    {
+        printf("%s     %s     %s     %d     %d     %d     \n",dev[i].shebeihao,dev[i].mingcheng,dev[i].changjia,dev[i].riqi,dev[i].shuliang,dev[i].jiage);
+    }
+    printf("************************************************************************************************\n");
+
+
+}
+
+void chazhao()
+{
+    int i;
+    char a[20],ch[10];
+    printf("name:");
+    scanf("%s",a);
+    for(i=0; i<count; i++)
+    {
+        if(strcmp(dev[i].mingcheng,a)==0)
+        {
+            printf("************************************************************************************************\n");
+            printf("设备编号 设备名称 厂家 购买时间 数量 价格 \n");
+            printf("%s     %s     %s     %d     %d     %d     \n",dev[i].shebeihao,dev[i].mingcheng,dev[i].changjia,dev[i].riqi,dev[i].shuliang,dev[i].jiage);
+            printf("************************************************************************************************\n");
+        }
+    }
+
+}
